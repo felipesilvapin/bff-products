@@ -25,6 +25,21 @@ public class ProductEntrypointMapperImpl implements IProductEntrypointMapper {
         return storeDto;
     }
 
+    @Override
+    public ProductDto productDomainToDto(ProductDomain productDomain) {
+        if (productDomain == null) {
+            return null;
+        }
+
+        ProductDto productDto = new ProductDto();
+        productDto.setProductId(productDomain.getProductId());
+        productDto.setValue(productDomain.getValue());
+        productDto.setPrice(productDomain.getPrice());
+        productDto.setQuantity(productDto.getQuantity());
+
+        return productDto;
+    }
+
     private ProductDto mapProductDomainToDto(ProductDomain productDomain) {
         ProductDto productDto = new ProductDto();
         productDto.setProductId(productDomain.getProductId());

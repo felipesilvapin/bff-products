@@ -31,4 +31,16 @@ public class StrapiRepositoryImpl implements IStrapiRepository {
         }
         return response;
     }
+
+    @Override
+    public ProductResponseEntity getProductById(String productId, String locale) {
+        ProductResponseEntity response = null;
+        try {
+            response = strapiFeignClient.getProductById(strapiAuthorization, productId, "*", locale);
+        }
+        catch (FeignException e) {
+            System.err.println("Não há produto com id ${productId} cadastrado");
+        }
+        return response;
+    }
 }

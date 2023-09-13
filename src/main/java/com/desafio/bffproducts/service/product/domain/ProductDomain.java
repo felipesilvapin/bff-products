@@ -10,4 +10,6 @@ public class ProductDomain {
     @JsonProperty("id")
     int productId;
     String value;
+    public double price;
+    public int quantity;
 }

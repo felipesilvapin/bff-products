@@ -5,6 +5,7 @@ import com.desafio.bffproducts.repository.feign.entity.ProductAttributesEntity;
 import com.desafio.bffproducts.repository.feign.entity.ProductDataEntity;
 import com.desafio.bffproducts.repository.feign.entity.ProductResponseEntity;
 import com.desafio.bffproducts.service.product.contracts.IProductService;
+import com.desafio.bffproducts.service.product.domain.ProductDomain;
 import com.desafio.bffproducts.service.product.domain.StoreDomain;
 import com.desafio.bffproducts.service.product.mapper.IProductServiceMapper;
 import lombok.RequiredArgsConstructor;
@@ -47,4 +48,26 @@ public class ProductServiceImpl implements IProductService {
 
         return response;
     }
+
+    @Override
+    public ResponseEntity<ProductDomain> getProductById(String productId, String locale) {
+        final ProductResponseEntity productResponseEntity = strapiRepository.getProductById(productId, locale);
+
+        try {
+            ProductDomain domain = productServiceMapper.getProductById(productResponseEntity, productId);
+            ProductDomain productDomain = new ProductDomain();
+
+            productDomain.setProductId(domain.getProductId());
+            productDomain.setValue(domain.getValue());
+            productDomain.setPrice(domain.getPrice());
+            productDomain.setQuantity(domain.getQuantity());
+
+           return ResponseEntity.ok(productDomain);
+        } catch (Exception e) {
+            System.err.println("Não há produto com esse id");
+            return null;
+        }
+    }
+
+
 }

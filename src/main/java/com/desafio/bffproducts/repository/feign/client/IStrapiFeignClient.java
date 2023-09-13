@@ -15,4 +15,12 @@ public interface IStrapiFeignClient {
             @RequestHeader("Authorization") String authorizationHeader,
             @RequestParam(value = "populate", defaultValue = "*", required = false) String populate,
             @RequestParam(value = "locale", defaultValue = "en-US", required = false) String locale);
+
+    @Headers("Content-Type: application/json")
+    @GetMapping("/api/store")
+    ProductResponseEntity getProductById(
+            @RequestHeader("Authorization") String authorizationHeader,
+            @RequestParam(value = "id") String productId,
+            @RequestParam(value = "populate", defaultValue = "*", required = false) String populate,
+            @RequestParam(value = "locale", defaultValue = "en-US", required = false) String locale);
 }

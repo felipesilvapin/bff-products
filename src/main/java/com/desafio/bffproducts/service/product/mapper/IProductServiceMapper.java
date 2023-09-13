@@ -14,6 +14,27 @@ import java.util.stream.Collectors;
 
 @Mapper(componentModel = MappingConstants.ComponentModel.SPRING)
 public interface IProductServiceMapper {
+    default ProductDomain getProductById(ProductResponseEntity productResponseEntity, String productId) {
+        if (productResponseEntity == null || productResponseEntity.getData() == null ||
+                productResponseEntity.getData().getAttributes() == null ||
+                productResponseEntity.getData().getAttributes().getProducts() == null) {
+            return null;
+        }
+
+        List<ProductEntity> products = productResponseEntity.getData().getAttributes().getProducts();
+        for (ProductEntity productEntity : products) {
+            if (productId.equals(String.valueOf(productEntity.getId()))) {
+                ProductDomain productDomain = new ProductDomain();
+                productDomain.setProductId(productEntity.getId());
+                productDomain.setPrice(productEntity.getPrice());
+                productDomain.setValue(productEntity.getValue());
+                productDomain.setQuantity(productEntity.getQuantity());
+                return productDomain;
+            }
+        }
+
+        return null;
+    }
     default StoreDomain productEntityToDomain(final ProductResponseEntity productResponse) {
         final List<ProductDomain> productsList = new ArrayList<>();
         final StoreDomain storeDomain = new StoreDomain();
