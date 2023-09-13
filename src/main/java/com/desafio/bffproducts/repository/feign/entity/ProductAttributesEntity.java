@@ -10,9 +10,9 @@ import java.util.List;
 @Data
 @AllArgsConstructor
 @NoArgsConstructor
-public class ProductAttributes {
-    public Date createdAt;
-    public Date updatedAt;
-    public Date publishedAt;
-    public List<Product> products;
+public class ProductAttributesEntity {
+    Date createdAt;
+    Date updatedAt;
+    Date publishedAt;
+    List<ProductEntity> products;
 }

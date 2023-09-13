@@ -1,6 +1,6 @@
 package com.desafio.bffproducts.repository.feign.client;
 
-import com.desafio.bffproducts.repository.feign.entity.ProductResponse;
+import com.desafio.bffproducts.repository.feign.entity.ProductResponseEntity;
 import feign.Headers;
 import org.springframework.cloud.openfeign.FeignClient;
 import org.springframework.web.bind.annotation.GetMapping;
@@ -11,7 +11,7 @@ import org.springframework.web.bind.annotation.RequestParam;
 public interface IStrapiFeignClient {
     @Headers("Content-Type: application/json")
     @GetMapping("/api/store")
-    ProductResponse getProducts(
+    ProductResponseEntity getProducts(
             @RequestHeader("Authorization") String authorizationHeader,
             @RequestParam(value = "populate", defaultValue = "*", required = false) String populate,
             @RequestParam(value = "locale", defaultValue = "en-US", required = false) String locale);

@@ -1,8 +1,8 @@
 package com.desafio.bffproducts.repository.feign.contracts;
 
 
-import com.desafio.bffproducts.repository.feign.entity.ProductResponse;
+import com.desafio.bffproducts.repository.feign.entity.ProductResponseEntity;
 
 public interface IStrapiRepository {
-    ProductResponse getProducts(String locale);
+    ProductResponseEntity getProducts(String locale);
 }

@@ -2,8 +2,10 @@ package com.desafio.bffproducts.repository.feign.implementation;
 
 import com.desafio.bffproducts.repository.feign.client.IStrapiFeignClient;
 import com.desafio.bffproducts.repository.feign.contracts.IStrapiRepository;
-import com.desafio.bffproducts.repository.feign.entity.ProductResponse;
+import com.desafio.bffproducts.repository.feign.entity.ProductResponseEntity;
 import feign.FeignException;
+import lombok.AllArgsConstructor;
+import lombok.NoArgsConstructor;
 import lombok.RequiredArgsConstructor;
 import lombok.extern.log4j.Log4j2;
 import org.springframework.beans.factory.annotation.Value;
@@ -17,9 +19,10 @@ public class StrapiRepositoryImpl implements IStrapiRepository {
     private final IStrapiFeignClient strapiFeignClient;
     @Value("${feign.client.config.strapi.api.authorization}")
     String strapiAuthorization;
+
     @Override
-    public ProductResponse getProducts(final String locale) {
-        ProductResponse response = null;
+    public ProductResponseEntity getProducts(final String locale) {
+        ProductResponseEntity response = null;
         try {
             response = strapiFeignClient.getProducts(strapiAuthorization, "*", locale);
         }

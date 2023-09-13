@@ -7,7 +7,7 @@ import lombok.NoArgsConstructor;
 @Data
 @AllArgsConstructor
 @NoArgsConstructor
-public class ProductData {
-    public int id;
-    public ProductAttributes attributes;
+public class ProductDataEntity {
+    int id;
+    ProductAttributesEntity attributes;
 }
